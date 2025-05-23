@@ -21,7 +21,9 @@ func main() {
 	fmt.Println()
 	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	for _, num := range numbers {
-		fmt.Println(num)
+		if num%2 == 0 && num > 2 && num < 10 {
+			fmt.Println(num)
+		}
 	}
 
 	fmt.Println()
