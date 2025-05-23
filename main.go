@@ -2,80 +2,107 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 )
 
 // GLOBAL VARIABLES
-var name string = "Prosper Mbuma"
-var email string = "prospermbuma@gmail.com"
-var age int = 30
+//var name string = "Prosper Mbuma"
+//var email string = "prospermbuma@gmail.com"
+//var age int = 30
+
+// To-do App
+var shortGolang string = "Watch Go Crash Course"
+var fullGolang string = "Watch Nana's Golang Full Course"
+var rewardDessert string = "Reward myself with snacks"
+var taskItems = []string{shortGolang, fullGolang, rewardDessert}
 
 // MAIN FUNCTION
 func main() {
-	fmt.Println("Hello Go World")
-	greetings(name)
+	fmt.Println("######### Welcome to our TO-DO List App #########")
+	//greetings(name)
 
-	fmt.Println()
-	fmt.Println("======== User Profile ========")
-	fmt.Println("Name:", name)
-	fmt.Println("Email:", email)
-	fmt.Println("Age:", age)
+	//fmt.Println()
+	//fmt.Println("======== User Profile ========")
+	//fmt.Println("Name:", name)
+	//fmt.Println("Email:", email)
+	//fmt.Println("Age:", age)
 
-	fmt.Println()
-	// ARRAY - Is the list with a fixed size, for example 10 numbers.
-	// Loop through an array
-	numbers := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	for _, num := range numbers {
-		if num%2 == 0 && num > 2 && num < 10 {
-			fmt.Println(num)
-		}
-	}
+	//fmt.Println()
+	//// ARRAY - Is the list with a fixed size, for example 10 numbers.
+	//// Loop through an array
+	//numbers := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	//for _, num := range numbers {
+	//	if num%2 == 0 && num > 2 && num < 10 {
+	//		fmt.Println(num)
+	//	}
+	//}
 
-	fmt.Println()
-	// SLICE - Is the list with NO fixed size
-	// Loop through a slice
-	names := []string{"Victoria", "Prosper", "Joseph", "Gladness"}
-	for index, name := range names {
-		index++
-		fmt.Printf("%d. %s\n", index, name)
-	}
+	//fmt.Println()
+	//// SLICE - Is the list with NO fixed size
+	//// Loop through a slice
+	//names := []string{"Victoria", "Prosper", "Joseph", "Gladness"}
+	//for index, name := range names {
+	//	index++
+	//	fmt.Printf("%d. %s\n", index, name)
+	//}
 
-	fmt.Println()
-	for i := 1; i <= 5; i++ {
-		fmt.Println("i =", 100/i)
-	}
+	//fmt.Println()
+	//for i := 1; i <= 5; i++ {
+	//	fmt.Println("i =", 100/i)
+	//}
 
-	fmt.Println()
-	// To-do App
-	var shortGolang string = "Watch Go Crash Course"
-	var fullGolang string = "Watch Nana's Golang Full Course"
-	var rewardDessert string = "Reward myself with snacks"
-	var taskItems = []string{shortGolang, fullGolang, rewardDessert}
+	//fmt.Println()
+	//// To-do App
+	//var shortGolang string = "Watch Go Crash Course"
+	//var fullGolang string = "Watch Nana's Golang Full Course"
+	//var rewardDessert string = "Reward myself with snacks"
+	//var taskItems = []string{shortGolang, fullGolang, rewardDessert}
 
-	printTasks(taskItems)
-	fmt.Println()
+	//printTasks(taskItems)
+	//fmt.Println()
 
-	taskItems = addTask(taskItems, "Keep coding with go")
-	taskItems = addTask(taskItems, "Study the bible")
-	printTasks(taskItems)
+	//taskItems = addTask(taskItems, "Keep coding with go")
+	//taskItems = addTask(taskItems, "Study the bible")
+	//printTasks(taskItems)
+
+	// APIs
+	http.HandleFunc("/", sayHello)
+	http.HandleFunc("/show-tasks", showTasks)
+
+	// Starting server
+	http.ListenAndServe(":8080", nil)
 
 }
 
-// FUNCTION DECLARATION
+// FUNCTION DECLARATIONS
 // User-defined functions
-func greetings(name string) {
-	fmt.Println("Hello " + name)
+//func greetings(name string) {
+//	fmt.Println("Hello " + name)
+//}
+
+// sayHello
+func sayHello(writer http.ResponseWriter, request *http.Request) {
+	var greeting = "Hello user, Welcome to our TO-DO List App!"
+	fmt.Fprintln(writer, greeting)
 }
 
-// Print Tasks
-func printTasks(taskItems []string) {
-	fmt.Println("======== TO DO LIST ========")
-	for index, task := range taskItems {
-		fmt.Printf("%d. %s\n", index+1, task)
+// Show Tasks
+func showTasks(writer http.ResponseWriter, request *http.Request) {
+	for _, task := range taskItems {
+		fmt.Fprintln(writer, task)
 	}
 }
 
-// Add Task
-func addTask(taskItems []string, newTask string) []string {
-	var updatedTaskItems = append(taskItems, newTask)
-	return updatedTaskItems
-}
+//// Print Tasks
+//func printTasks(taskItems []string) {
+//	fmt.Println("======== TO DO LIST ========")
+//	for index, task := range taskItems {
+//		fmt.Printf("%d. %s\n", index+1, task)
+//	}
+//}
+
+//// Add Task
+//func addTask(taskItems []string, newTask string) []string {
+//	var updatedTaskItems = append(taskItems, newTask)
+//	return updatedTaskItems
+//}
