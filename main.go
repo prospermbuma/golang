@@ -5,7 +5,7 @@ import (
 )
 
 // GLOBAL VARIABLES
-var name string = "Prosper"
+var name string = "Prosper Mbuma"
 var email string = "prospermbuma@gmail.com"
 var age int = 30
 
@@ -19,7 +19,6 @@ func main() {
 	fmt.Println("Name:", name)
 	fmt.Println("Email:", email)
 	fmt.Println("Age:", age)
-	fmt.Println("==============================")
 
 	fmt.Println()
 	// ARRAY - Is the list with a fixed size, for example 10 numbers.
@@ -37,7 +36,6 @@ func main() {
 	names := []string{"Victoria", "Prosper", "Joseph", "Gladness"}
 	for index, name := range names {
 		index++
-		//fmt.Print(index, ". ", name, "\n")
 		fmt.Printf("%d. %s\n", index, name)
 	}
 
@@ -45,10 +43,39 @@ func main() {
 	for i := 1; i <= 5; i++ {
 		fmt.Println("i =", 100/i)
 	}
+
+	fmt.Println()
+	// To-do App
+	var shortGolang string = "Watch Go Crash Course"
+	var fullGolang string = "Watch Nana's Golang Full Course"
+	var rewardDessert string = "Reward myself with snacks"
+	var taskItems = []string{shortGolang, fullGolang, rewardDessert}
+
+	printTasks(taskItems)
+	fmt.Println()
+
+	taskItems = addTask(taskItems, "Keep coding with go")
+	taskItems = addTask(taskItems, "Study the bible")
+	printTasks(taskItems)
+
 }
 
 // FUNCTION DECLARATION
 // User-defined functions
 func greetings(name string) {
 	fmt.Println("Hello " + name)
+}
+
+// Print Tasks
+func printTasks(taskItems []string) {
+	fmt.Println("======== TO DO LIST ========")
+	for index, task := range taskItems {
+		fmt.Printf("%d. %s\n", index+1, task)
+	}
+}
+
+// Add Task
+func addTask(taskItems []string, newTask string) []string {
+	var updatedTaskItems = append(taskItems, newTask)
+	return updatedTaskItems
 }
